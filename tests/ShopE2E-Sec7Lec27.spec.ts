@@ -1,13 +1,14 @@
-const { test, expect } = require('@playwright/test');
-test.only('@Web Client App login and extract all product titles', async ({ page }) => {
+import { test, expect } from '@playwright/test';
+test('@Web Client App login and extract all product titles', async ({ page }) => {
    //js file- Login js, DashboardPage
    const email = "muhammadwasimkhan8@gmail.com";
    const productName = 'IPHONE 13 PRO';
    const products = page.locator(".card-body");
    await page.goto("https://rahulshettyacademy.com/client");
    await page.locator("#userEmail").fill(email);
-   await page.locator("#userPassword").type("Nopass@1234");
+   await page.locator("#userPassword").fill("Nopass@1234");
    await page.locator("[value='Login']").click();
+   await page.waitForLoadState('networkidle');
    await page.waitForLoadState('networkidle');
    await page.locator(".card-body b").first().waitFor();
    const titles = await page.locator(".card-body b").allTextContents();
@@ -43,7 +44,7 @@ test.only('@Web Client App login and extract all product titles', async ({ page 
    for (let i = 0; i < count; i++) {
       console.log('Checking cart item at index:', i);
       if (await cartItems.nth(i).locator("h3").textContent() === productName) {
-         orderNumber = await cartItems.nth(i).locator('[class="itemNumber"]').textContent();
+         orderNumber = (await cartItems.nth(i).locator('.itemNumber').textContent()) ?? '';
          console.log('product found in cart at index', i, 'with order number as', orderNumber) //this shows incorrect order number
 
          await page.pause()
@@ -67,16 +68,16 @@ test.only('@Web Client App login and extract all product titles', async ({ page 
    await expect(page.locator('form')).toContainText('* Invalid Coupon');
    await page.getByRole('combobox').nth(1).selectOption('30');
    await page.getByPlaceholder('Select Country').click();
-   await page.getByPlaceholder('Select Country').type('pak');
+   await page.getByPlaceholder('Select Country').pressSequentially('pak');
+   await page.getByRole("button", { name: ' Pakistan' }).click();
    await page.waitForTimeout(2000);
-   await page.locator('span[class="ng-star-inserted"] i').click();
    await page.getByText('Place Order ').click();
    // Confirm Thank you page
    await page.locator('h1').waitFor();
    console.log(await page.locator('h1').textContent());
 
    // Get order number
-   orderNumber = await page.locator("td.box:nth-of-type(1) label").nth(1).textContent();
+   orderNumber = (await page.locator("td.box:nth-of-type(1) label").nth(1).textContent()) || '';
    orderNumber = orderNumber.replace(/\|/g, '').trim();
    console.log(`Correct order number: (${orderNumber})`);
 

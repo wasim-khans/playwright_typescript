@@ -4,5 +4,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 .env
-/environmentConfigs
+/environmentConfigs/.env.Motive
 /tests/Motive
+

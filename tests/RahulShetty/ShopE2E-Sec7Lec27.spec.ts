@@ -90,9 +90,7 @@ test('@Web Client App login and extract all product titles', async ({ page }) =>
    console.log('Total orders in order list', numberOfAllOrders);
    const allorderNumbers= await allOrders.allTextContents();
    console.log('All ordersNumbers =', allorderNumbers);   
-   console.log('Order number to be verified:', orderNumber);
-   console.log('First order number in order history:', allorderNumbers[0]);
-   console.log("Order number to be verified is present in order list:", allorderNumbers.includes(orderNumber));
+   console.log("Order number to be verified is present in order list? :", allorderNumbers.includes(orderNumber));
   
    await page.pause();
 

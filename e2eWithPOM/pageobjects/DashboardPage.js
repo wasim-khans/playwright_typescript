@@ -1,0 +1,25 @@
+class DashboardPage{
+    constructor(page){
+        this.page=page;
+        this.allProductsList=page.locator(".card-body");
+        this.allProductsTexts=page.locator(".card-body b");
+        this.url='https://rahulshettyacademy.com/client/dashboard/dash';
+    
+    }
+    async navigate(){
+        await this.page.goto(this.url);
+    }
+    async waitForProductsToLoad(){
+        await this.allProductsList.first().waitFor();
+    }
+    async selectProductAndAddToCart(productName) {
+        this.waitForProductsToLoad();
+        await this.allProductsList.filter({ hasText: this.productName }).first().getByRole("button", { name: 'Add To Cart' }).click();
+    }
+
+    async goToCart() {
+        await this.page.getByRole("listitem").getByRole('button', { name: "Cart" }).click();
+    }
+
+}
+module.exports={DashboardPage};

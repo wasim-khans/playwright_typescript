@@ -11,8 +11,7 @@ test('@Webst Client App login', async ({ page }) => {
    await page.waitForLoadState('networkidle');
    await page.locator(".card-body b").first().waitFor();
    
-   await page.locator(".card-body").filter({hasText:"ZARA COAT 3"})
-   .getByRole("button",{name:"Add to Cart"}).click();
+   await page.locator(".card-body").filter({hasText:"ZARA COAT 3"}).getByRole("button",{name:"Add to Cart"}).click();
  
    await page.getByRole("listitem").getByRole('button',{name:"Cart"}).click();
  

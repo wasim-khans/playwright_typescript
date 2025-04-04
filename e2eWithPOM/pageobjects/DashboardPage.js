@@ -4,10 +4,13 @@ class DashboardPage{
         this.allProductsList=page.locator(".card-body");
         this.allProductsTexts=page.locator(".card-body b");
         this.url='https://rahulshettyacademy.com/client/dashboard/dash';
-    
+        this.mainUrl='https://rahulshettyacademy.com/client/';
     }
     async navigate(){
         await this.page.goto(this.url);
+    }
+    async navigateFirstTimeUsingTokenSetup(){
+        await this.page.goto(this.mainUrl);
     }
     async waitForProductsToLoad(){
         await this.allProductsList.first().waitFor();

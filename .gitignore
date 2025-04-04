@@ -6,4 +6,4 @@ node_modules/
 .env
 /environmentConfigs/.env.Motive
 /tests/Motive
-
+/e2eWithPOM/testdata/

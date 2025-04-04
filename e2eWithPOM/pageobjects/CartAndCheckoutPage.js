@@ -26,7 +26,7 @@ class CartAndCheckoutPage{
         await this.page.getByRole("button", { name: "India" }).nth(1).click();
         
     }
-    async placeOrderAndVerifyPlacemenet(){
+    async placeOrderAndVerifyPlacement(){
         await this.page.getByText("PLACE ORDER").click();
         await expect(this.page.getByText("Thankyou for the order.")).toBeVisible();
     }

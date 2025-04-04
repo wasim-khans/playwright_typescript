@@ -1,8 +1,8 @@
 class DashboardPage{
     constructor(page){
         this.page=page;
-        this.allProductsList=page.locator(".card-body");
-        this.allProductsTexts=page.locator(".card-body b");
+        this.allProductsList=this.page.locator(".card-body");
+        this.allProductsTexts=this.page.locator(".card-body b");
         this.url='https://rahulshettyacademy.com/client/dashboard/dash';
         this.mainUrl='https://rahulshettyacademy.com/client/';
     }
@@ -11,6 +11,7 @@ class DashboardPage{
     }
     async navigateFirstTimeUsingTokenSetup(){
         await this.page.goto(this.mainUrl);
+        await this.page.goto(this.url)
     }
     async waitForProductsToLoad(){
         await this.allProductsList.first().waitFor();

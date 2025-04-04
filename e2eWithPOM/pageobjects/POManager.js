@@ -3,7 +3,7 @@ const {DashboardPage}= require('./DashboardPage.js');
 const {CartAndCheckoutPage}= require('./CartAndCheckoutPage.js');
 
 class POManager{
-    constructor(page){
+    constructor(page,browser){
         
         this.page=page;
         this.loginPage= new LoginPage(this.page);

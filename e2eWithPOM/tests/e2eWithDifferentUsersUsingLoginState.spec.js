@@ -12,7 +12,6 @@ test.beforeAll(async ({ browser }) => {
     adminContext = await browser.newContext();
     // managerContext = await browser.newContext();
     adminPage = await adminContext.newPage();
-    adminContext.clea
     // const managerPage = await managerContext.newPage();
     loginAndTokenManagerUsingLoginState = new LoginAndTokenManagerUsingLoginState(adminPage);
     adminSessionFilePath = await loginAndTokenManagerUsingLoginState.loginWithAdminRoleAndSaveStateAndReturnPath();
@@ -22,15 +21,15 @@ test.beforeAll(async ({ browser }) => {
 })
 
 
-test('Login with new broswerContext loading the state from saved adminSessionFile', async ({browser}) => {
+test('Login with new broswerContext loading the state from saved adminSessionfile', async ({ browser }) => {
 
-    const adminContext=await browser.newContext({storageState:adminSessionFilePath})
-    const page=await adminContext.newPage();
-    const poManager=new POManager(page)
+    const adminContext = await browser.newContext({ storageState: adminSessionFilePath })
+    const page = await adminContext.newPage();
+    const poManager = new POManager(page)
     await page.pause()
     const dashboardPage = await poManager.getDashboardPage();
     await dashboardPage.navigateFirstTimeUsingTokenSetup();
     await page.pause()
-    
+
 
 })

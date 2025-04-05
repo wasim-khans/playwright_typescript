@@ -3,6 +3,7 @@ const { error } = require('console');
 class DashboardPage {
     constructor(page) {
         this.page = page;
+        
         this.allProductsTiles = this.page.locator(".card-body");
         this.allProductsTextsElements = this.page.locator(".card-body b");
         this.url = 'https://rahulshettyacademy.com/client/dashboard/dash';
@@ -21,7 +22,7 @@ class DashboardPage {
     async isDashboardPageVerified() {
         const isSignOutVisible = await this.isSignOutButtonVisibleOnDashboard();
         const isAutomationPracticeTextVisible = await this.isAutomationPracticeTextVisible();
-        console.log('Dashboard Page verification AND condition',isSignOutVisible && isAutomationPracticeTextVisible)
+        console.log('Is DashboardPage Verified? => ',isSignOutVisible && isAutomationPracticeTextVisible)
         return (isSignOutVisible && isAutomationPracticeTextVisible);
     }
     async navigate() {
@@ -38,7 +39,7 @@ class DashboardPage {
         let signOutButtonLocator = 'button:has-text("Sign Out")'
         let isSignOutButtonVisible = this.verifyLocatorIsVisibleOrNot(signOutButtonLocator);
         if (isSignOutButtonVisible) {
-            console.log('Sign out button is visible')
+            
             return true
         }
         else {
@@ -48,9 +49,9 @@ class DashboardPage {
     async isAutomationPracticeTextVisible() {
         let text='Automation Practice';
         let textLocator = await this.page.getByText(text);
-        console.log('text locator for the automation text = ',textLocator)
+        // console.log('text locator for the automation text = ',textLocator)
         let isVisible = await textLocator.isVisible();
-        console.log('isAutomationPracticeTextVisible isVisible ',isVisible)
+        // console.log('isAutomationPracticeTextVisible isVisible ',isVisible)
         if (isVisible){
             console.log(text,'is visible')
             return true;

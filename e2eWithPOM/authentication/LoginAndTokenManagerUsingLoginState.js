@@ -11,9 +11,7 @@ class LoginAndTokenManagerUsingLoginState {
 
     async loginWithAdminRoleAndSaveStateAndReturnPath() {
         this.role = secrets.adminRole;
-        await this.adminPage.pause()
         await this.adminPage.goto(this.shopLoginUrl);
-        await this.adminPage.pause()
         await this.adminPage.getByPlaceholder("email@example.com").fill(this.role.email);
         await this.adminPage.getByPlaceholder("enter your passsword").fill(this.role.password);
         await this.adminPage.getByRole('button', { name: "Login" }).click();

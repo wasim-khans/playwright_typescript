@@ -12,42 +12,25 @@ test.beforeAll(async ({ browser }) => {
     adminContext = await browser.newContext();
     // managerContext = await browser.newContext();
     adminPage = await adminContext.newPage();
+    adminContext.clea
     // const managerPage = await managerContext.newPage();
     loginAndTokenManagerUsingLoginState = new LoginAndTokenManagerUsingLoginState(adminPage);
-    adminSessionFilePath=await loginAndTokenManagerUsingLoginState.loginWithAdminRoleAndSaveStateAndReturnPath();
-    
-    
-  
+    adminSessionFilePath = await loginAndTokenManagerUsingLoginState.loginWithAdminRoleAndSaveStateAndReturnPath();
+    await adminContext.close();
 
 
 })
 
 
-test('Login with different users using login state', async () => {
+test('Login with new broswerContext loading the state from saved adminSessionFile', async ({browser}) => {
 
-    
-    const page = await adminPage
-    poManager = new POManager(page);
-    // admin login and e2e
-    
-    let dashboardPage= await poManager.getDashboardPage();
+    const adminContext=await browser.newContext({storageState:adminSessionFilePath})
+    const page=await adminContext.newPage();
+    const poManager=new POManager(page)
+    await page.pause()
+    const dashboardPage = await poManager.getDashboardPage();
     await dashboardPage.navigateFirstTimeUsingTokenSetup();
+    await page.pause()
     
-    console.log(await dashboardPage.allProductsTextsElements)
-    let texts= await dashboardPage.getAllProductTitles();
-    console.log(texts)
-    
-
-    // const dashboardPage = await poManager.getDashboardPage();
-    // await dashboardPage.waitForProductsToLoad();
-    // await dashboardPage.selectProductAndAddToCart(testData.productName);
-    // await dashboardPage.goToCart();
-
-    // // Verify the product in the cart and complete the checkout process
-    // const cartAndCheckoutPage = await poManager.getCartAndCheckoutPage();
-    // await cartAndCheckoutPage.verifyProductInCart(testData.productName);
-    // await cartAndCheckoutPage.clickOnCheckoutButton();
-    // await cartAndCheckoutPage.fillCheckoutDetails();
-    // await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
 
 })

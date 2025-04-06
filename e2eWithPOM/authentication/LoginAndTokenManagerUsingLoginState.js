@@ -2,11 +2,12 @@ const path = require('path');
 const secrets = require('../testdata/secrets.json');
 class LoginAndTokenManagerUsingLoginState {
 
-    constructor(adminPage) {
+    constructor(adminPage,managerPage) {
         this.adminPage=adminPage;
-        // this.managerPage=managerPage;
+        this.managerPage=managerPage;
         this.shopLoginUrl = 'https://rahulshettyacademy.com/client';
-        this.sessionStoragePath=`./e2eWithPOM/authentication/adminSession.json`
+        this.adminSessionStoragePath=`./e2eWithPOM/authentication/adminSession.json`
+        this.managerSessionStoragePath=`./e2eWithPOM/authentication/managerSession.json`
     }
 
     async loginWithAdminRoleAndSaveStateAndReturnPath() {
@@ -16,14 +17,24 @@ class LoginAndTokenManagerUsingLoginState {
         await this.adminPage.getByPlaceholder("enter your passsword").fill(this.role.password);
         await this.adminPage.getByRole('button', { name: "Login" }).click();
         await this.adminPage.context().close
-    
         
-        // Save the browser context's state to a file (e.g., state.json)
         await this.adminPage.waitForLoadState('networkidle');
-
-        await this.adminPage.context().storageState({ path: this.sessionStoragePath });
-        console.log('Path to admin session state',this.sessionStoragePath)
-        return this.sessionStoragePath;
+        await this.adminPage.context().storageState({ path: this.adminSessionStoragePath });
+        console.log('Path to admin session state',this.adminSessionStoragePath)
+        return this.adminSessionStoragePath;
+    }
+    async loginWithManagerRoleAndSaveStateAndReturnPath() {
+        this.role = secrets.managerRole;
+        await this.managerPage.goto(this.shopLoginUrl);
+        await this.managerPage.getByPlaceholder("email@example.com").fill(this.role.email);
+        await this.managerPage.getByPlaceholder("enter your passsword").fill(this.role.password);
+        await this.managerPage.getByRole('button', { name: "Login" }).click();
+        await this.managerPage.context().close
+        
+        await this.managerPage.waitForLoadState('networkidle');
+        await this.managerPage.context().storageState({ path: this.managerSessionStoragePath });
+        console.log('Path to manager session state',this.managerSessionStoragePath)
+        return this.managerSessionStoragePath;
     }
 
 

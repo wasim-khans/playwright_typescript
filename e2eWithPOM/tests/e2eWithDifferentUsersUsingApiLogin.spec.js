@@ -15,7 +15,6 @@ test.beforeAll(async({browser})=>{
     adminToken=await loginAndTokenManager.shopLoginWithAdminAndreturnToken();
     managerToken=await loginAndTokenManager.shopLoginWithManagerAndreturnToken();
 
-
 })
 
 test('Login via UI and Buy Product e2e', async({page})=>{
@@ -25,13 +24,11 @@ test('Login via UI and Buy Product e2e', async({page})=>{
     const loginPage = await poManager.getLoginPage();
     await loginPage.navigate();
     await loginPage.fillCredentialsAndLogin();
-
     // Navigate to the dashboard and add a product to the cart
     const dashboardPage = await poManager.getDashboardPage();
     await dashboardPage.waitForProductsToLoad();
     await dashboardPage.selectProductAndAddToCart(testData.productName);
     await dashboardPage.goToCart();
-
     // Verify the product in the cart and complete the checkout process
     const cartAndCheckoutPage = await poManager.getCartAndCheckoutPage();
     await cartAndCheckoutPage.verifyProductInCart(testData.productName);
@@ -67,7 +64,6 @@ test('@admin Admin login via API and Buy Product e2e', async({browser})=>{
     await cartAndCheckoutPage.clickOnCheckoutButton();
     await cartAndCheckoutPage.fillCheckoutDetails();
     await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
-    
     
 })
 

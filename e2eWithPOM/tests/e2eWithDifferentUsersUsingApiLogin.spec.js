@@ -21,7 +21,7 @@ test.beforeAll(async({browser})=>{
 test('Login via UI and Buy Product e2e', async({page})=>{
     poManager = new POManager(page);
     commonUtility=new CommonUtility(page);
-    // Login to the application
+    // Login to the application without any token setting
     const loginPage = await poManager.getLoginPage();
     await loginPage.navigate();
     await loginPage.fillCredentialsAndLogin();
@@ -46,57 +46,52 @@ test('Login via UI and Buy Product e2e', async({page})=>{
 
 
 
-// test('@admin Admin login via API and Buy Product e2e', async({browser})=>{
-//     test.setTimeout(60000); // Set timeout to 60 seconds
-//     const context = await browser.newContext();
-//     await context.addInitScript((token) => {
-//         window.localStorage.setItem("token", token);
-//         console.log('Token set as cookie', window.localStorage.getItem('token'));
-//     }, adminToken);
-//     const page = await context.newPage();
-//     poManager = new POManager(page);
-//     // console.log('running admin e2e with this token',adminToken)
-//     // Navigate to the dashboard and add a product to the cart
-//     const dashboardPage = await poManager.getDashboardPage();
-//     await dashboardPage.navigateFirstTimeUsingTokenSetup();
-//     await dashboardPage.waitForProductsToLoad();
-//     await dashboardPage.selectProductAndAddToCart(testData.productName);
-//     await dashboardPage.goToCart();
+test('@admin Admin login via API and Buy Product e2e', async({browser})=>{
 
-//     // Verify the product in the cart and complete the checkout process
-//     const cartAndCheckoutPage = await poManager.getCartAndCheckoutPage();
-//     await cartAndCheckoutPage.verifyProductInCart(testData.productName);
-//     await cartAndCheckoutPage.clickOnCheckoutButton();
-//     await cartAndCheckoutPage.fillCheckoutDetails();
-    
-//     await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
+    const context = await browser.newContext();
+    await context.addInitScript((token) => {
+        window.localStorage.setItem("token", token);
+        console.log('Token set as cookie', window.localStorage.getItem('token'));
+    }, adminToken);
+    const page = await context.newPage();
+    poManager = new POManager(page);
+    // Navigate to the dashboard and add a product to the cart
+    const dashboardPage = await poManager.getDashboardPage();
+    await dashboardPage.navigateFirstTimeUsingTokenSetup();
+    await dashboardPage.waitForProductsToLoad();
+    await dashboardPage.selectProductAndAddToCart(testData.productName);
+    await dashboardPage.goToCart();
+    // Verify the product in the cart and complete the checkout process
+    const cartAndCheckoutPage = await poManager.getCartAndCheckoutPage();
+    await cartAndCheckoutPage.verifyProductInCart(testData.productName);
+    await cartAndCheckoutPage.clickOnCheckoutButton();
+    await cartAndCheckoutPage.fillCheckoutDetails();
+    await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
     
     
-// })
+})
 
 
-// test('@manager Login via API and Buy Product e2e', async({browser})=>{
-//     const context = await browser.newContext();
+test('@manager Login via API and Buy Product e2e', async({browser})=>{
     
-//     await context.addInitScript((token) => {
-//         window.localStorage.setItem("token", token);
-//     }, managerToken);
-//     const page = await context.newPage();
-//     poManager = new POManager(page);
-
-//     // Navigate to the dashboard and add a product to the cart
-//     const dashboardPage = await poManager.getDashboardPage();
-//     await dashboardPage.navigateFirstTimeUsingTokenSetup();
-//     await dashboardPage.waitForProductsToLoad();
-//     await dashboardPage.selectProductAndAddToCart(testData.productName);
-//     await dashboardPage.goToCart();
-
-//     // Verify the product in the cart and complete the checkout process
-//     const cartAndCheckoutPage = await poManager.getCartAndCheckoutPage();
-//     await cartAndCheckoutPage.verifyProductInCart(testData.productName);
-//     await cartAndCheckoutPage.clickOnCheckoutButton();
-//     await cartAndCheckoutPage.fillCheckoutDetails();
-//     await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
+    const context = await browser.newContext();
+    await context.addInitScript((token) => {
+        window.localStorage.setItem("token", token);
+    }, managerToken);
+    const page = await context.newPage();
+    poManager = new POManager(page);
+    // Navigate to the dashboard and add a product to the cart
+    const dashboardPage = await poManager.getDashboardPage();
+    await dashboardPage.navigateFirstTimeUsingTokenSetup();
+    await dashboardPage.waitForProductsToLoad();
+    await dashboardPage.selectProductAndAddToCart(testData.productName);
+    await dashboardPage.goToCart();
+    // Verify the product in the cart and complete the checkout process
+    const cartAndCheckoutPage = await poManager.getCartAndCheckoutPage();
+    await cartAndCheckoutPage.verifyProductInCart(testData.productName);
+    await cartAndCheckoutPage.clickOnCheckoutButton();
+    await cartAndCheckoutPage.fillCheckoutDetails();
+    await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
     
-// })
+})
 

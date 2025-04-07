@@ -7,3 +7,4 @@ node_modules/
 /environmentConfigs/.env.Motive
 /tests/Motive
 /e2eWithPOM/testdata/
+/e2eWithPOM/authentication/managerSession.json

@@ -8,3 +8,4 @@ node_modules/
 /tests/Motive
 /e2eWithPOM/testdata/
 /e2eWithPOM/authentication/managerSession.json
+/e2eWithPOM/authentication/adminSession.json

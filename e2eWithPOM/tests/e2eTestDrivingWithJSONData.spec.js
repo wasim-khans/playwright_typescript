@@ -4,7 +4,7 @@ const { POManager } = require('../pageobjects/POManager.js');
 const path = require('path');
 let poManager;
 
-test('@Webst Client App login', async ({ page }) => {
+test.only('@Webst Client App login', async ({ page }) => {
     // Initialize Page Object Manager
     poManager = new POManager(page);
 

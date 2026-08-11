@@ -12,6 +12,12 @@ This repository is a learning and experimentation project for browser and API te
 
 This is a practice repository, not a production test framework or client project. The public demo application is the system under test.
 
+## How to read this repository
+
+Treat this as a learning lab rather than a finished framework. The `e2eWithPOM` folder contains the most structured examples; the Rahul Shetty, TodoMVC, and JavaScript folders preserve separate tutorial exercises and experiments.
+
+For a portfolio review, the useful signal is the range of Playwright patterns explored here, not the number of files. The current repository contains no production or client application code.
+
 ## Repository layout
 
 ```text
@@ -32,6 +38,8 @@ npx playwright install
 ```
 
 The demo credentials and saved session state are local-only fixtures. Keep them out of future commits and provide equivalent local files when setting up a fresh clone.
+
+Test discovery works without those files. Live login and checkout flows require local copies of the ignored `e2eWithPOM/testdata` fixtures.
 
 ## Running the configured POM suite
 

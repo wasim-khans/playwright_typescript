@@ -1,6 +1,6 @@
 const { test, expect, describe } = require('@playwright/test');
 const { POManager } = require('../../pageobjects/POManager.js');
-const { CommonUtility } = require('../../utilities/commonUtility.js');
+const { CommonUtility } = require('../../utilities/CommonUtility.js');
 
 // Test data for examples
 const testProduct = {

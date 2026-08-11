@@ -1,5 +1,5 @@
 const path = require('path');
-const secrets = require('../testdata/secrets.json');
+const { secrets } = require('../utilities/TestData.js');
 class LoginAndTokenManagerUsingLoginState {
 
     constructor(adminPage,managerPage) {

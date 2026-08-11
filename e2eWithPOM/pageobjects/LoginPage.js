@@ -1,5 +1,5 @@
 
-const secrets = require('../testdata/secrets.json');
+const { secrets } = require('../utilities/TestData.js');
 
 class LoginPage{
     constructor(page){
@@ -15,6 +15,9 @@ async navigate(){
   await this.page.goto(this.url);
 }
 async fillCredentialsAndLogin(){
+    if (!this.defaultUserEmail || !this.deafultUserPassword) {
+        throw new Error('Local credentials are missing. Provide e2eWithPOM/testdata/secrets.json before running login flows.');
+    }
     await this.page.getByPlaceholder("email@example.com").fill(this.defaultUserEmail);
     await this.page.getByPlaceholder("enter your passsword").fill(this.deafultUserPassword);
     await this.page.getByRole('button',{name:"Login"}).click();

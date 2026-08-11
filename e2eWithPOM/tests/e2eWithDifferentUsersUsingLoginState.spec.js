@@ -1,6 +1,5 @@
 const { test, expect } = require('@playwright/test');
 const { POManager } = require('../pageobjects/POManager.js');
-const testData = require('../testdata/e2eData.json');
 const { LoginAndTokenManagerUsingLoginState } = require('../authentication/LoginAndTokenManagerUsingLoginState.js');
 
 let poManager;

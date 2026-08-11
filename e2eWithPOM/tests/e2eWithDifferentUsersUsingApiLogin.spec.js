@@ -1,5 +1,5 @@
 const { test, expect, request } = require('@playwright/test');
-const testData = require('../testdata/e2eData.json');
+const { testData } = require('../utilities/TestData.js');
 const { POManager } = require('../pageobjects/POManager.js');
 const { CommonUtility } = require('../utilities/CommonUtility.js')
 const { LoginAndTokenManager}= require('../authentication/LoginAndTokenManagerUsingAPILogin.js')

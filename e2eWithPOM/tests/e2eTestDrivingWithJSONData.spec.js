@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const testData = require('../testdata/e2eData.json');
+const { testData } = require('../utilities/TestData.js');
 const { POManager } = require('../pageobjects/POManager.js');
 let poManager;
 

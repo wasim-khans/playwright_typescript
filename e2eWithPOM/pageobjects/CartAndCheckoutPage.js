@@ -1,12 +1,11 @@
 const { expect } = require('@playwright/test');
 class CartAndCheckoutPage{
-    constructor(page,expect) {
-        this.expect=expect;
+    constructor(page) {
         this.page = page;
         this.url = 'https://rahulshettyacademy.com/client/dashboard/cart';
     }
     async navigate() {
-        await this.page.goto(url);
+        await this.page.goto(this.url);
     }
     
 

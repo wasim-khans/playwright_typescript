@@ -1,5 +1,3 @@
-const { expect } = require('@playwright/test');
-const { error } = require('console');
 class DashboardPage {
     constructor(page) {
         this.page = page;
@@ -35,16 +33,7 @@ class DashboardPage {
         }
     }
     async isSignOutButtonVisibleOnDashboard() {
-        // let signOutButtonLocator=(this.page.getByRole('button', { name: "Sign Out" })).toBeVisible();
-        let signOutButtonLocator = 'button:has-text("Sign Out")'
-        let isSignOutButtonVisible = this.verifyLocatorIsVisibleOrNot(signOutButtonLocator);
-        if (isSignOutButtonVisible) {
-            
-            return true
-        }
-        else {
-            return false
-        }
+        return await this.verifyLocatorIsVisibleOrNot('button:has-text("Sign Out")');
     }
     async isAutomationPracticeTextVisible() {
         let text='Automation Practice';
@@ -63,16 +52,21 @@ class DashboardPage {
     }
     async navigateFirstTimeUsingTokenSetup() {
         await this.page.goto(this.mainUrl);
-        await this.isDashboardPageVerified();
-        
-
+        const isVerified = await this.isDashboardPageVerified();
+        if (!isVerified) {
+            throw new Error('Dashboard verification failed after token setup');
+        }
     }
     async waitForProductsToLoad() {
         await this.allProductsTiles.first().waitFor();
     }
     async selectProductAndAddToCart(productName) {
-        this.waitForProductsToLoad();
-        await this.allProductsTiles.filter({ hasText: this.productName }).first().getByRole("button", { name: 'Add To Cart' }).click();
+        await this.waitForProductsToLoad();
+        await this.allProductsTiles
+            .filter({ hasText: productName })
+            .first()
+            .getByRole("button", { name: 'Add To Cart' })
+            .click();
     }
 
     async goToCart() {

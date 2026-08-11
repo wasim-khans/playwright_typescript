@@ -11,7 +11,6 @@ node_modules/
 /environmentConfigs/.env.*
 
 # Local-only generated/session state
-/tests/Motive
 /e2eWithPOM/testdata/
 /e2eWithPOM/authentication/*Session.json
 /e2eWithPOM/e2eWithPOM/authentication/*Session.json

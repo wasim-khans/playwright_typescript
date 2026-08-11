@@ -3,9 +3,15 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Local environment files and credentials
 .env
-/environmentConfigs/.env.Motive
+.env.*
+!.env.example
+/environmentConfigs/.env.*
+
+# Local-only generated/session state
 /tests/Motive
 /e2eWithPOM/testdata/
-/e2eWithPOM/authentication/managerSession.json
-/e2eWithPOM/authentication/adminSession.json
+/e2eWithPOM/authentication/*Session.json
+/e2eWithPOM/e2eWithPOM/authentication/*Session.json

@@ -27,10 +27,8 @@ test('Login with new broswerContext loading the state from saved adminSessionfil
     const adminContext = await browser.newContext({ storageState: adminSessionFilePath })
     const page = await adminContext.newPage();
     poManager = new POManager(page)
-    await page.pause()
     const dashboardPage = await poManager.getDashboardPage();
     await dashboardPage.navigateFirstTimeUsingTokenSetup();
-    await page.pause()
 
 })
 
@@ -43,7 +41,7 @@ test('Login with new broswerContext loading the state from saved managerSessionF
     await dashboardPage.navigateFirstTimeUsingTokenSetup();
 })
 
-test.only('PlayAround with locators and assertions', async ({ browser }) => {
+test('PlayAround with locators and assertions', async ({ browser }) => {
 
     const managerContext = await browser.newContext({ storageState: managerSessionFilePath })
     const page = await managerContext.newPage();

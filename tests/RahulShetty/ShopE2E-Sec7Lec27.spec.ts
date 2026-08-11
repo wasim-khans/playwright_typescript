@@ -47,7 +47,6 @@ test('@Web Client App login and extract all product titles', async ({ page }) =>
          orderNumber = (await cartItems.nth(i).locator('.itemNumber').textContent()) ?? '';
          console.log('product found in cart at index', i, 'with order number as', orderNumber) //this shows incorrect order number
 
-         await page.pause()
          break;
 
       }
@@ -83,7 +82,6 @@ test('@Web Client App login and extract all product titles', async ({ page }) =>
 
    // Go to history page and confirm if order UUID is present
    await page.locator('[routerlink="/dashboard/myorders"]').nth(0).click();
-   await page.pause();
    await page.locator("tbody th").first().waitFor();
    const allOrders = await page.locator("tbody th")
    const numberOfAllOrders = await allOrders.count();
@@ -92,7 +90,4 @@ test('@Web Client App login and extract all product titles', async ({ page }) =>
    console.log('All ordersNumbers =', allorderNumbers);   
    console.log("Order number to be verified is present in order list? :", allorderNumbers.includes(orderNumber));
   
-   await page.pause();
-
-
 });

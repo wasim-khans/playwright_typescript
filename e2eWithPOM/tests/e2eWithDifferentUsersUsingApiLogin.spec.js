@@ -1,7 +1,7 @@
 const { test, expect, request } = require('@playwright/test');
 const testData = require('../testdata/e2eData.json');
 const { POManager } = require('../pageobjects/POManager.js');
-const { CommonUtility } = require('../utilities/commonUtility.js')
+const { CommonUtility } = require('../utilities/CommonUtility.js')
 const { LoginAndTokenManager}= require('../authentication/LoginAndTokenManagerUsingAPILogin.js')
 let loginAndTokenManager;
 let commonUtility;
@@ -35,9 +35,7 @@ test('Login via UI and Buy Product e2e', async({page})=>{
     await cartAndCheckoutPage.clickOnCheckoutButton();
     await cartAndCheckoutPage.fillCheckoutDetails();
     await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
-    await page.pause()
     await commonUtility.cleanCacheAndCookies();
-    await page.pause();
     
 })
 
@@ -90,4 +88,3 @@ test('@manager Login via API and Buy Product e2e', async({browser})=>{
     await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
     
 })
-

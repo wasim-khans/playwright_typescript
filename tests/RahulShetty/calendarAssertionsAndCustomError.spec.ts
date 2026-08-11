@@ -61,5 +61,4 @@ test("Calendar validations", async ({ page }) => {
         }
     }
     }
-    await page.pause()
 });

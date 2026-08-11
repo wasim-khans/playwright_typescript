@@ -22,7 +22,6 @@ test('@API Place the order', async ({ page }) => {
     }, response.token);
     // 
     await page.goto("https://rahulshettyacademy.com/client");
-    await page.pause()
     await page.locator("button[routerlink*='myorders']").click();
     await page.locator("tbody").waitFor();
     const rows = await page.locator("tbody tr");
@@ -36,7 +35,6 @@ test('@API Place the order', async ({ page }) => {
         }
     }
     const orderIdDetails = await page.locator(".col-text").textContent();
-    //await page.pause();
     expect(response.orderId.includes(orderIdDetails)).toBeTruthy();
 
 });

@@ -1,10 +1,9 @@
 const { test, expect } = require('@playwright/test');
 const testData = require('../testdata/e2eData.json');
 const { POManager } = require('../pageobjects/POManager.js');
-const path = require('path');
 let poManager;
 
-test.only('@Webst Client App login', async ({ page }) => {
+test('@Webst Client App login', async ({ page }) => {
     // Initialize Page Object Manager
     poManager = new POManager(page);
 
@@ -26,6 +25,4 @@ test.only('@Webst Client App login', async ({ page }) => {
     await cartAndCheckoutPage.fillCheckoutDetails();
     await cartAndCheckoutPage.placeOrderAndVerifyPlacement();
 
-    
-    await page.pause();
 });
